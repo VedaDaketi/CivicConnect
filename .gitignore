@@ -1,0 +1,75 @@
+# Node / JavaScript
+node_modules/
+client/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Vite / build output
+/dist/
+client/dist/
+/.vite
+client/.vite
+
+# Environment files
+.env
+.env.*
+.env.local
+
+# Cache and lock temporary files
+.cache/
+.parcel-cache/
+.eslintcache
+
+# Logs
+*.log
+
+# Python
+env/
+server/env/
+venv/
+.venv/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+pip-wheel-metadata/
+*.egg
+*.whl
+*.pyc
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+dist/
+build/
+eggs/
+parts/
+sdist/
+var/
+*.sqlite3
+instance/
+.webassets-cache
+
+# PyInstaller
+*.manifest
+*.spec
+
+# IDEs and editors
+.vscode/
+.idea/
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Other
+coverage/
+/.history/
