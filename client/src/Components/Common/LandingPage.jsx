@@ -41,11 +41,11 @@ const LandingPage = () => {
 
   // --- SUB-PAGES ---
   const LoginPage = () => (
-    <div className="min-h-screen pt-24 pb-12 px-4 bg-gray-50 flex items-center justify-center">
-      <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
+    <div className="min-h-screen pt-24 pb-12 px-4 bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-blue-900">Welcome Back</h2>
-          <p className="text-gray-600 mt-2">Select your login type</p>
+          <h2 className="text-3xl font-bold text-blue-900 dark:text-blue-400">Welcome Back</h2>
+          <p className="text-gray-600 dark:text-gray-300 mt-2">Select your login type</p>
         </div>
         <div className="space-y-4">
           <button className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition flex items-center justify-center gap-2">
@@ -54,12 +54,12 @@ const LandingPage = () => {
           <button className="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold transition flex items-center justify-center gap-2">
             <Building2 size={20} /> Government Official
           </button>
-          <button className="w-full py-3 px-4 border-2 border-gray-300 hover:border-gray-400 text-gray-700 rounded-lg font-semibold transition flex items-center justify-center gap-2">
+          <button className="w-full py-3 px-4 border-2 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 text-gray-700 dark:text-gray-200 rounded-lg font-semibold transition flex items-center justify-center gap-2">
             <HardHat size={20} /> Field Worker
           </button>
         </div>
         <div className="mt-6 text-center">
-          <button onClick={() => navigateTo('home')} className="text-blue-600 hover:underline">
+          <button onClick={() => navigateTo('home')} className="text-blue-600 dark:text-blue-400 hover:underline">
             Back to Home
           </button>
         </div>
@@ -68,15 +68,15 @@ const LandingPage = () => {
   );
 
   const ReportIssuePage = () => (
-    <div className="min-h-screen pt-24 pb-12 px-4 bg-gray-50">
-      <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-8">
-        <h2 className="text-2xl font-bold text-blue-900 mb-6 flex items-center gap-2">
+    <div className="min-h-screen pt-24 pb-12 px-4 bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8">
+        <h2 className="text-2xl font-bold text-blue-900 dark:text-blue-400 mb-6 flex items-center gap-2">
           <AlertTriangle className="text-red-500" /> Report an Issue
         </h2>
         <form className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Issue Category</label>
-            <select className="w-full p-3 border border-gray-300 bg-white text-gray-900 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Issue Category</label>
+            <select className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
               <option>Select Category...</option>
               <option>Pothole / Road Damage</option>
               <option>Garbage / Sanitation</option>
@@ -85,15 +85,15 @@ const LandingPage = () => {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-            <textarea className="w-full p-3 border border-gray-300 bg-white text-gray-900 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none h-32" placeholder="Describe the issue..."></textarea>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
+            <textarea className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none h-32" placeholder="Describe the issue..."></textarea>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-             <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 flex flex-col items-center justify-center text-gray-500 hover:bg-gray-50 cursor-pointer transition">
+             <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition">
                 <Camera size={32} />
                 <span className="mt-2 text-sm">Upload Photo/Video</span>
              </div>
-             <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 flex flex-col items-center justify-center text-gray-500 hover:bg-gray-50 cursor-pointer transition">
+             <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition">
                 <MapPin size={32} />
                 <span className="mt-2 text-sm">Tag Location</span>
              </div>
@@ -101,7 +101,7 @@ const LandingPage = () => {
           <button type="button" className="w-full py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition">
             Submit Report
           </button>
-          <button onClick={() => navigateTo('home')} className="w-full py-3 text-gray-600 hover:bg-gray-100 rounded-lg transition">
+          <button onClick={() => navigateTo('home')} className="w-full py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition">
             Cancel
           </button>
         </form>
@@ -110,17 +110,17 @@ const LandingPage = () => {
   );
 
   const TrackIssuePage = () => (
-    <div className="min-h-screen pt-24 pb-12 px-4 bg-gray-50 flex items-center justify-center">
-      <div className="max-w-lg w-full bg-white rounded-xl shadow-lg p-8">
-        <h2 className="text-2xl font-bold text-blue-900 mb-4 flex items-center gap-2">
+    <div className="min-h-screen pt-24 pb-12 px-4 bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="max-w-lg w-full bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+        <h2 className="text-2xl font-bold text-blue-900 dark:text-blue-400 mb-4 flex items-center gap-2">
           <Search /> Track Your Complaint
         </h2>
-        <p className="text-gray-600 mb-6">Enter your Complaint ID to check the real-time status of your report.</p>
+        <p className="text-gray-600 dark:text-gray-300 mb-6">Enter your Complaint ID to check the real-time status of your report.</p>
         <div className="flex gap-2 mb-6">
-          <input type="text" placeholder="e.g., CIV-2024-8892" className="flex-1 p-3 border border-gray-300 bg-white text-gray-900 rounded-lg outline-none focus:ring-2 focus:ring-blue-500" />
+          <input type="text" placeholder="e.g., CIV-2024-8892" className="flex-1 p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg outline-none focus:ring-2 focus:ring-blue-500" />
           <button className="bg-blue-600 text-white px-6 rounded-lg font-semibold hover:bg-blue-700 transition">Track</button>
         </div>
-        <button onClick={() => navigateTo('home')} className="text-blue-600 hover:underline block mx-auto">
+        <button onClick={() => navigateTo('home')} className="text-blue-600 dark:text-blue-400 hover:underline block mx-auto">
           Back to Home
         </button>
       </div>
@@ -131,28 +131,28 @@ const LandingPage = () => {
 
   // 1. Header
   const Header = () => (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-3' : 'bg-transparent py-5'}`}>
+    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white dark:bg-gray-900 shadow-md py-3' : 'bg-transparent py-5'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigateTo('home')}>
           <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
             C
           </div>
-          <div className={`font-bold text-xl transition-colors duration-300 ${scrolled ? 'text-gray-900' : 'text-white'}`}>
+          <div className={`font-bold text-xl transition-colors duration-300 ${scrolled ? 'text-gray-900 dark:text-white' : 'text-white'}`}>
             Civic<span className="text-blue-400">Connect</span>
           </div>
         </div>
 
-        {/* Desktop Nav - Fixed Contrast Buttons */}
+        {/* Desktop Nav - Transparent by default, hovers added, dynamic text color */}
         <nav className="hidden md:flex items-center gap-6">
           {['Home', 'How It Works', 'About'].map((item) => (
             <button 
               key={item} 
               onClick={() => navigateTo('home')}
-              className={`font-medium px-3 py-2 rounded-lg transition-all duration-200 ${
+              className={`font-medium px-3 py-2 rounded-lg transition-all duration-200 bg-transparent ${
                 scrolled 
-                  ? 'text-gray-700 hover:text-blue-600 hover:bg-gray-100' 
-                  : 'text-white/90 hover:text-white hover:bg-white/10'
+                  ? 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800' 
+                  : 'text-white hover:bg-white/10'
               }`}
             >
               {item}
@@ -160,24 +160,24 @@ const LandingPage = () => {
           ))}
           <button 
              onClick={() => navigateTo('track')}
-             className={`font-medium px-3 py-2 rounded-lg transition-all duration-200 ${
+             className={`font-medium px-3 py-2 rounded-lg transition-all duration-200 bg-transparent ${
                 scrolled 
-                  ? 'text-gray-700 hover:text-blue-600 hover:bg-gray-100' 
-                  : 'text-white/90 hover:text-white hover:bg-white/10'
+                  ? 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800' 
+                  : 'text-white hover:bg-white/10'
              }`}
           >
             Track Issue
           </button>
         </nav>
 
-        {/* Auth Buttons Desktop - Fixed Contrast */}
+        {/* Auth Buttons Desktop */}
         <div className="hidden md:flex items-center gap-4">
           <button 
             onClick={() => navigateTo('login')}
-            className={`font-semibold px-4 py-2 rounded-lg transition-all duration-200 ${
+            className={`font-semibold px-4 py-2 rounded-lg transition-all duration-200 bg-transparent ${
               scrolled 
-                ? 'text-blue-600 bg-blue-50 hover:bg-blue-100' 
-                : 'text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm'
+                ? 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800' 
+                : 'text-white hover:bg-white/10'
             }`}
           >
             Login
@@ -193,18 +193,18 @@ const LandingPage = () => {
         {/* Mobile Menu Toggle */}
         <button className="md:hidden p-2 rounded-lg transition-colors focus:outline-none" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen 
-            ? <X size={28} className={scrolled ? 'text-gray-900' : 'text-white'} /> 
-            : <Menu size={28} className={scrolled ? 'text-gray-900' : 'text-white'} />
+            ? <X size={28} className={scrolled ? 'text-gray-900 dark:text-white' : 'text-white'} /> 
+            : <Menu size={28} className={scrolled ? 'text-gray-900 dark:text-white' : 'text-white'} />
           }
         </button>
       </div>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-xl py-4 px-4 flex flex-col gap-2 border-t">
-          <button onClick={() => navigateTo('home')} className="text-left py-3 px-4 rounded-lg font-medium text-gray-700 hover:bg-gray-50">Home</button>
-          <button onClick={() => navigateTo('track')} className="text-left py-3 px-4 rounded-lg font-medium text-gray-700 hover:bg-gray-50">Track Issue</button>
-          <button onClick={() => navigateTo('login')} className="text-left py-3 px-4 rounded-lg font-medium text-blue-600 bg-blue-50">Login</button>
+        <div className="md:hidden absolute top-full left-0 w-full bg-white dark:bg-gray-900 shadow-xl py-4 px-4 flex flex-col gap-2 border-t dark:border-gray-800">
+          <button onClick={() => navigateTo('home')} className="text-left py-3 px-4 rounded-lg font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800">Home</button>
+          <button onClick={() => navigateTo('track')} className="text-left py-3 px-4 rounded-lg font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800">Track Issue</button>
+          <button onClick={() => navigateTo('login')} className="text-left py-3 px-4 rounded-lg font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800">Login</button>
           <button onClick={() => navigateTo('report')} className="bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg font-bold text-center mt-2 transition">Report Issue</button>
         </div>
       )}
@@ -213,9 +213,9 @@ const LandingPage = () => {
 
   // 2. Hero Section
   const Hero = () => (
-    <section className="relative min-h-[90vh] flex items-center pt-20 pb-32 w-full overflow-hidden">
+    <section className="relative min-h-[90vh] flex items-center pt-20 pb-32 overflow-hidden">
       {/* Background with overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 z-0 w-full">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 z-0">
         {/* Abstract city pattern */}
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
       </div>
@@ -251,30 +251,30 @@ const LandingPage = () => {
 
         {/* Hero Visual Mockup */}
         <div className="hidden md:block relative">
-           <div className="relative z-10 bg-white rounded-2xl shadow-2xl p-4 transform rotate-2 hover:rotate-0 transition duration-500">
-              <div className="bg-gray-100 rounded-xl h-64 w-full flex items-center justify-center relative overflow-hidden">
-                 <div className="absolute inset-0 flex items-center justify-center text-gray-300">
+           <div className="relative z-10 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-4 transform rotate-2 hover:rotate-0 transition duration-500">
+              <div className="bg-gray-100 dark:bg-gray-900 rounded-xl h-64 w-full flex items-center justify-center relative overflow-hidden">
+                 <div className="absolute inset-0 flex items-center justify-center text-gray-300 dark:text-gray-700">
                     <MapPin size={120} className="opacity-20" />
                  </div>
                  {/* Floating UI Elements */}
-                 <div className="absolute top-4 left-4 bg-white p-3 rounded-lg shadow-lg flex items-center gap-3 border border-gray-100">
-                    <div className="bg-green-100 p-2 rounded-full text-green-600"><CheckCircle size={20} /></div>
+                 <div className="absolute top-4 left-4 bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg flex items-center gap-3 border border-gray-100 dark:border-gray-700">
+                    <div className="bg-green-100 dark:bg-green-900/50 p-2 rounded-full text-green-600 dark:text-green-400"><CheckCircle size={20} /></div>
                     <div>
-                       <p className="text-xs text-gray-500">Status</p>
-                       <p className="font-bold text-sm text-gray-800">Pothole Repaired</p>
+                       <p className="text-xs text-gray-500 dark:text-gray-400">Status</p>
+                       <p className="font-bold text-sm text-gray-800 dark:text-gray-100">Pothole Repaired</p>
                     </div>
                  </div>
-                 <div className="absolute bottom-4 right-4 bg-white p-3 rounded-lg shadow-lg flex items-center gap-3 border border-gray-100">
-                    <div className="bg-orange-100 p-2 rounded-full text-orange-600"><Clock size={20} /></div>
+                 <div className="absolute bottom-4 right-4 bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg flex items-center gap-3 border border-gray-100 dark:border-gray-700">
+                    <div className="bg-orange-100 dark:bg-orange-900/50 p-2 rounded-full text-orange-600 dark:text-orange-400"><Clock size={20} /></div>
                     <div>
-                       <p className="text-xs text-gray-500">Avg Response</p>
-                       <p className="font-bold text-sm text-gray-800">24 Hours</p>
+                       <p className="text-xs text-gray-500 dark:text-gray-400">Avg Response</p>
+                       <p className="font-bold text-sm text-gray-800 dark:text-gray-100">24 Hours</p>
                     </div>
                  </div>
               </div>
               <div className="mt-4 space-y-2">
-                 <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                 <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                 <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+                 <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
               </div>
            </div>
         </div>
@@ -282,7 +282,7 @@ const LandingPage = () => {
       
       {/* Wave shape divider */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-0">
-        <svg className="relative block w-full h-[100px] text-white rotate-180" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <svg className="relative block w-full h-[100px] text-white dark:text-gray-900 rotate-180" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
             <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="currentColor"></path>
         </svg>
       </div>
@@ -291,24 +291,24 @@ const LandingPage = () => {
 
   // 3. Problem Statement
   const Problems = () => (
-    <section className="py-20 bg-white w-full">
+    <section className="py-20 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Why This System is Needed?</h2>
-        <p className="text-gray-600 max-w-2xl mx-auto mb-12">
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Why This System is Needed?</h2>
+        <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12">
           Traditional reporting is slow, opaque, and uncoordinated. We tackle the most common civic issues head-on.
         </p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
-            { icon: <div className="bg-orange-600 h-2 w-8 rounded-full"></div>, label: 'Potholes', color: 'bg-orange-100 text-orange-600' },
-            { icon: <div className="w-6 h-8 border-2 border-current border-t-0 rounded-b-md"></div>, label: 'Garbage Overflow', color: 'bg-green-100 text-green-600' },
-            { icon: <div className="w-6 h-6 rounded-full border-4 border-current border-t-transparent animate-spin-slow"></div>, label: 'Water Logging', color: 'bg-blue-100 text-blue-600' },
-            { icon: <div className="w-1 h-8 bg-current relative"><div className="absolute -top-1 -left-2 w-5 h-5 bg-yellow-400 rounded-full opacity-50"></div></div>, label: 'Streetlights', color: 'bg-yellow-100 text-yellow-600' }
+            { icon: <div className="bg-orange-600 dark:bg-orange-400 h-2 w-8 rounded-full"></div>, label: 'Potholes', color: 'bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400' },
+            { icon: <div className="w-6 h-8 border-2 border-current border-t-0 rounded-b-md"></div>, label: 'Garbage Overflow', color: 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400' },
+            { icon: <div className="w-6 h-6 rounded-full border-4 border-current border-t-transparent animate-spin-slow"></div>, label: 'Water Logging', color: 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400' },
+            { icon: <div className="w-1 h-8 bg-current relative"><div className="absolute -top-1 -left-2 w-5 h-5 bg-yellow-400 rounded-full opacity-50"></div></div>, label: 'Streetlights', color: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400' }
           ].map((item, idx) => (
-            <div key={idx} className="p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition bg-white group">
+            <div key={idx} className="p-6 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md transition bg-white dark:bg-gray-800 group">
               <div className={`w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 text-2xl ${item.color} group-hover:scale-110 transition`}>
                 {item.icon}
               </div>
-              <h3 className="font-semibold text-gray-800">{item.label}</h3>
+              <h3 className="font-semibold text-gray-800 dark:text-gray-200">{item.label}</h3>
             </div>
           ))}
         </div>
@@ -318,16 +318,16 @@ const LandingPage = () => {
 
   // 4. How It Works
   const HowItWorks = () => (
-    <section className="py-20 bg-gray-50 w-full">
+    <section className="py-20 bg-gray-50 dark:bg-gray-800/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <span className="text-blue-600 font-bold tracking-wide uppercase text-sm">Workflow</span>
-          <h2 className="text-3xl font-bold text-gray-900 mt-2">How It Works</h2>
+          <span className="text-blue-600 dark:text-blue-400 font-bold tracking-wide uppercase text-sm">Workflow</span>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mt-2">How It Works</h2>
         </div>
 
         <div className="grid md:grid-cols-5 gap-4 relative">
           {/* Connector Line (Desktop) */}
-          <div className="hidden md:block absolute top-12 left-0 w-full h-1 bg-gray-200 -z-10"></div>
+          <div className="hidden md:block absolute top-12 left-0 w-full h-1 bg-gray-200 dark:bg-gray-700 -z-10"></div>
 
           {[
             { step: '01', title: 'Report', desc: 'Citizen snaps a photo & tags location.', icon: <Camera size={24} /> },
@@ -337,12 +337,12 @@ const LandingPage = () => {
             { step: '05', title: 'Notification', desc: 'Citizen gets alerted of fix.', icon: <AlertTriangle size={24} /> },
           ].map((item, idx) => (
             <div key={idx} className="flex flex-col items-center text-center group">
-              <div className="w-24 h-24 bg-white border-4 border-blue-50 rounded-full flex items-center justify-center shadow-sm mb-6 relative group-hover:border-blue-500 transition duration-300">
+              <div className="w-24 h-24 bg-white dark:bg-gray-900 border-4 border-blue-50 dark:border-gray-800 rounded-full flex items-center justify-center shadow-sm mb-6 relative group-hover:border-blue-500 dark:group-hover:border-blue-500 transition duration-300">
                 <span className="absolute -top-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full">{item.step}</span>
-                <div className="text-blue-600">{item.icon}</div>
+                <div className="text-blue-600 dark:text-blue-400">{item.icon}</div>
               </div>
-              <h3 className="font-bold text-lg text-gray-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-gray-600 px-2">{item.desc}</p>
+              <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-2">{item.title}</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 px-2">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -352,11 +352,11 @@ const LandingPage = () => {
 
   // 5. Key Features
   const Features = () => (
-    <section className="py-20 bg-white w-full">
+    <section className="py-20 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
-            <h2 className="text-3xl font-bold text-gray-900">Built for Transparency & Speed</h2>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Built for Transparency & Speed</h2>
             <div className="space-y-6">
               {[
                 { title: 'AI-Based Classification', desc: 'Automatically detects issue type from images using Computer Vision.' },
@@ -365,37 +365,37 @@ const LandingPage = () => {
                 { title: 'Department Dashboards', desc: 'Dedicated analytics for government officials to monitor performance.' }
               ].map((feat, idx) => (
                 <div key={idx} className="flex gap-4">
-                  <div className="flex-shrink-0 w-6 h-6 mt-1 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                  <div className="flex-shrink-0 w-6 h-6 mt-1 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
                     <CheckCircle size={14} />
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900">{feat.title}</h4>
-                    <p className="text-gray-600 text-sm mt-1">{feat.desc}</p>
+                    <h4 className="font-bold text-gray-900 dark:text-gray-100">{feat.title}</h4>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">{feat.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          <div className="bg-gray-100 rounded-2xl p-8 grid grid-cols-2 gap-4">
-            <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition">
-               <BarChart3 className="text-blue-500 mb-3" size={32} />
-               <div className="text-2xl font-bold text-gray-800">85%</div>
-               <div className="text-xs text-gray-500">Faster Resolution</div>
+          <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl p-8 grid grid-cols-2 gap-4">
+            <div className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm hover:shadow-md transition">
+               <BarChart3 className="text-blue-500 dark:text-blue-400 mb-3" size={32} />
+               <div className="text-2xl font-bold text-gray-800 dark:text-white">85%</div>
+               <div className="text-xs text-gray-500 dark:text-gray-300">Faster Resolution</div>
             </div>
-            <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition mt-8">
-               <ShieldCheck className="text-emerald-500 mb-3" size={32} />
-               <div className="text-2xl font-bold text-gray-800">100%</div>
-               <div className="text-xs text-gray-500">Verified Fixes</div>
+            <div className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm hover:shadow-md transition mt-8">
+               <ShieldCheck className="text-emerald-500 dark:text-emerald-400 mb-3" size={32} />
+               <div className="text-2xl font-bold text-gray-800 dark:text-white">100%</div>
+               <div className="text-xs text-gray-500 dark:text-gray-300">Verified Fixes</div>
             </div>
-            <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition">
-               <User className="text-purple-500 mb-3" size={32} />
-               <div className="text-2xl font-bold text-gray-800">50k+</div>
-               <div className="text-xs text-gray-500">Active Citizens</div>
+            <div className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm hover:shadow-md transition">
+               <User className="text-purple-500 dark:text-purple-400 mb-3" size={32} />
+               <div className="text-2xl font-bold text-gray-800 dark:text-white">50k+</div>
+               <div className="text-xs text-gray-500 dark:text-gray-300">Active Citizens</div>
             </div>
-            <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition mt-8">
-               <MapPin className="text-red-500 mb-3" size={32} />
-               <div className="text-2xl font-bold text-gray-800">12k</div>
-               <div className="text-xs text-gray-500">Issues Solved</div>
+            <div className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm hover:shadow-md transition mt-8">
+               <MapPin className="text-red-500 dark:text-red-400 mb-3" size={32} />
+               <div className="text-2xl font-bold text-gray-800 dark:text-white">12k</div>
+               <div className="text-xs text-gray-500 dark:text-gray-300">Issues Solved</div>
             </div>
           </div>
         </div>
@@ -405,7 +405,7 @@ const LandingPage = () => {
 
   // 6. Live Map Preview
   const LiveMap = () => (
-    <section className="py-20 bg-gray-900 text-white relative w-full overflow-hidden">
+    <section className="py-20 bg-gray-900 text-white relative overflow-hidden">
       <div className="absolute inset-0 bg-gray-800 opacity-50"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
@@ -449,10 +449,10 @@ const LandingPage = () => {
 
   // 7. User Types
   const UserTypes = () => (
-    <section className="py-20 bg-white w-full">
+    <section className="py-20 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900">Who is this for?</h2>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Who is this for?</h2>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
           {[
@@ -461,32 +461,32 @@ const LandingPage = () => {
               icon: <User size={40} />, 
               desc: 'Report issues, track status, and rate the resolution quality.',
               action: 'Login as Citizen',
-              color: 'text-blue-600',
-              bg: 'bg-blue-50'
+              color: 'text-blue-600 dark:text-blue-400',
+              bg: 'bg-blue-50 dark:bg-blue-900/20'
             },
             { 
               role: 'Government', 
               icon: <Building2 size={40} />, 
               desc: 'Manage departments, view analytics, and oversee zone performance.',
               action: 'Official Login',
-              color: 'text-indigo-600',
-              bg: 'bg-indigo-50'
+              color: 'text-indigo-600 dark:text-indigo-400',
+              bg: 'bg-indigo-50 dark:bg-indigo-900/20'
             },
             { 
               role: 'Field Workers', 
               icon: <HardHat size={40} />, 
               desc: 'Receive tasks, navigate to locations, and upload proof of work.',
               action: 'Worker App',
-              color: 'text-orange-600',
-              bg: 'bg-orange-50'
+              color: 'text-orange-600 dark:text-orange-400',
+              bg: 'bg-orange-50 dark:bg-orange-900/20'
             }
           ].map((user, idx) => (
-            <div key={idx} className="p-8 border border-gray-100 rounded-2xl bg-white hover:shadow-xl transition duration-300 flex flex-col items-center text-center">
+            <div key={idx} className="p-8 border border-gray-100 dark:border-gray-800 rounded-2xl bg-white dark:bg-gray-800 hover:shadow-xl transition duration-300 flex flex-col items-center text-center">
               <div className={`w-20 h-20 rounded-full ${user.bg} ${user.color} flex items-center justify-center mb-6`}>
                 {user.icon}
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">{user.role}</h3>
-              <p className="text-gray-600 mb-6 flex-grow">{user.desc}</p>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{user.role}</h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-6 flex-grow">{user.desc}</p>
               <button 
                 onClick={() => navigateTo('login')}
                 className={`font-semibold ${user.color} hover:underline`}
@@ -502,7 +502,7 @@ const LandingPage = () => {
 
   // 8. CTA
   const CTA = () => (
-    <section className="py-20 bg-blue-600 relative w-full overflow-hidden">
+    <section className="py-20 bg-blue-600 dark:bg-blue-800 relative overflow-hidden">
       <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
       <div className="max-w-4xl mx-auto px-4 text-center relative z-10 text-white">
         <h2 className="text-4xl font-bold mb-6">Be a Responsible Citizen. Help Improve Your City.</h2>
@@ -527,11 +527,11 @@ const LandingPage = () => {
 
   // 9. About
   const About = () => (
-    <section className="py-20 bg-gray-50 w-full">
+    <section className="py-20 bg-gray-50 dark:bg-gray-800">
       <div className="max-w-3xl mx-auto px-4 text-center">
         <div className="w-16 h-1 bg-blue-600 mx-auto mb-6"></div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">About The Initiative</h2>
-        <p className="text-gray-600 leading-relaxed">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">About The Initiative</h2>
+        <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
           The <strong>Crowdsourced Civic Issue Reporting & Resolution System</strong> is a digital initiative aimed at bridging the gap between municipal bodies and citizens. By leveraging Artificial Intelligence, Cloud Computing, and Geo-tagging, we ensure that no civic grievance goes unheard. Our mission is to build cleaner, safer, and smarter cities through transparency and community participation.
         </p>
       </div>
@@ -540,7 +540,7 @@ const LandingPage = () => {
 
   // 10. Footer
   const Footer = () => (
-    <footer className="bg-gray-900 text-gray-300 py-12 border-t border-gray-800 w-full">
+    <footer className="bg-gray-900 text-gray-300 py-12 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-4 gap-8">
         <div>
           <div className="flex items-center gap-2 mb-4 text-white">
@@ -580,13 +580,12 @@ const LandingPage = () => {
     </footer>
   );
 
-  // Added `style={{ colorScheme: 'light' }}` to prevent browsers like Opera GX from forcing an inverted dark mode
   return (
-    <div className="font-sans text-gray-800 overflow-x-hidden w-full min-h-screen bg-white" style={{ colorScheme: 'light' }}>
+    <div className="font-sans text-gray-800 dark:text-gray-200 overflow-x-hidden min-h-screen bg-white dark:bg-gray-900 m-0 p-0 flex flex-col">
       <Header />
       
       {currentPage === 'home' && (
-        <main className="w-full">
+        <main>
           <Hero />
           <Problems />
           <HowItWorks />
