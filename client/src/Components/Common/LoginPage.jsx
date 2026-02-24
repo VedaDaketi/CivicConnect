@@ -1,46 +1,224 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate, useInRouterContext, BrowserRouter } from 'react-router-dom';
 import { 
-  MapPin, 
-  Camera, 
-  CheckCircle, 
-  AlertTriangle, 
-  Clock, 
-  Menu, 
-  X, 
-  ChevronRight, 
-  User, 
-  Building2, 
-  HardHat, 
-  BarChart3, 
-  ShieldCheck, 
-  Smartphone,
-  Search,
-  LogIn
+  UserCircle2, Building2, HardHat, Mail, Lock, 
+  ArrowLeft, Eye, EyeOff, ChevronRight
 } from 'lucide-react';
 
-const LoginPage = () => (
-    <div className="min-h-screen pt-24 pb-12 px-4 bg-gray-50 flex items-center justify-center">
-      <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-blue-900">Welcome Back</h2>
-          <p className="text-gray-600 mt-2">Select your login type</p>
+const LoginPageContent = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  // Safely extract the role from the navigation state, defaulting to 'citizen'
+  const initialRole = location.state?.role || 'citizen';
+  
+  const [selectedRole, setSelectedRole] = useState(initialRole);
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+
+  // Keep state synced if location state changes
+  useEffect(() => {
+    if (location.state?.role) {
+      setSelectedRole(location.state.role);
+    }
+  }, [location.state?.role]);
+
+  const roles = [
+    { 
+      id: 'citizen', 
+      title: 'Citizen', 
+      icon: UserCircle2, 
+      color: 'blue',
+      desc: 'Report and track issues in your neighborhood'
+    },
+    { 
+      id: 'admin', 
+      title: 'Government', 
+      icon: Building2, 
+      color: 'purple',
+      desc: 'Official portal for department and zone management'
+    },
+    { 
+      id: 'worker', 
+      title: 'Field Worker', 
+      icon: HardHat, 
+      color: 'orange',
+      desc: 'Access tasks and submit proof-of-work'
+    }
+  ];
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(`Logging in as ${selectedRole}:`, formData);
+    // Logic for redirection based on role would go here
+  };
+
+  return (
+    <div className="w-screen min-h-screen bg-[#0f172a] text-white font-sans flex flex-col items-center justify-center p-6 relative overflow-x-hidden">
+      
+      {/* Background Decorative Elements */}
+      <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+      {/* Top Navigation */}
+      <div className="absolute top-8 left-8 md:top-12 md:left-12 z-50">
+        <button 
+          onClick={() => navigate('/')}
+          className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group"
+        >
+          <div className="p-2 bg-slate-800 rounded-lg group-hover:bg-slate-700">
+            <ArrowLeft className="w-4 h-4" />
+          </div>
+          <span className="text-sm font-medium">Back to Home</span>
+        </button>
+      </div>
+
+      {/* Login Container */}
+      <div className="w-full max-w-xl relative z-10 mt-16 md:mt-0">
+        <div className="text-center mb-10 space-y-2">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="bg-blue-600 p-2 rounded-xl">
+              <span className="font-bold text-2xl">C</span>
+            </div>
+            <span className="font-bold text-2xl tracking-tight text-blue-500">CivicConnect</span>
+          </div>
+          <h2 className="text-3xl font-bold">Welcome Back</h2>
+          <p className="text-slate-400">Please select your role and sign in to your portal</p>
         </div>
-        <div className="space-y-4">
-          <button className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition flex items-center justify-center gap-2">
-            <User size={20} /> Citizen Login
-          </button>
-          <button className="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold transition flex items-center justify-center gap-2">
-            <Building2 size={20} /> Government Official
-          </button>
-          <button className="w-full py-3 px-4 border-2 border-gray-300 hover:border-gray-400 text-gray-700 rounded-lg font-semibold transition flex items-center justify-center gap-2">
-            <HardHat size={20} /> Field Worker
-          </button>
+
+        {/* Role Selection */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          {roles.map((role) => {
+            const Icon = role.icon;
+            const isActive = selectedRole === role.id;
+            return (
+              <button
+                key={role.id}
+                onClick={() => setSelectedRole(role.id)}
+                className={`flex flex-col items-center p-4 rounded-2xl border transition-all ${
+                  isActive 
+                  ? `bg-slate-800 border-${role.color}-500 shadow-[0_0_20px_rgba(59,130,246,0.15)]` 
+                  : 'bg-slate-900/50 border-slate-800 hover:border-slate-700'
+                }`}
+              >
+                <div className={`p-3 rounded-xl mb-3 ${
+                  isActive ? `bg-${role.color}-500/20 text-${role.color}-400` : 'bg-slate-800 text-slate-500'
+                }`}>
+                  <Icon className="w-6 h-6" />
+                </div>
+                <span className={`text-sm font-bold ${isActive ? 'text-white' : 'text-slate-400'}`}>
+                  {role.title}
+                </span>
+              </button>
+            );
+          })}
         </div>
-        <div className="mt-6 text-center">
-          <button onClick={() => navigateTo('home')} className="text-blue-600 hover:underline">
-            Back to Home
-          </button>
+
+        {/* Form Card */}
+        <div className="bg-slate-900/80 border border-slate-800 p-8 rounded-[2.5rem] backdrop-blur-xl shadow-2xl">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-2 text-sm text-slate-400 font-medium px-1">
+              Currently logging in as: <span className="text-blue-400 font-bold capitalize">{selectedRole}</span>
+            </div>
+
+            {/* Email Field */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-slate-300 ml-1">Email Address</label>
+              <div className="relative group">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-blue-400 transition-colors">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <input 
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="name@example.com"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className="w-full bg-slate-950/50 border border-slate-800 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 rounded-2xl py-4 pl-12 pr-4 outline-none transition-all placeholder:text-slate-600"
+                />
+              </div>
+            </div>
+
+            {/* Password Field */}
+            <div className="space-y-2">
+              <div className="flex justify-between items-center ml-1">
+                <label className="text-sm font-medium text-slate-300">Password</label>
+                <button type="button" className="text-xs text-blue-500 hover:underline font-medium">Forgot Password?</button>
+              </div>
+              <div className="relative group">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-blue-400 transition-colors">
+                  <Lock className="w-5 h-5" />
+                </div>
+                <input 
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  required
+                  placeholder="••••••••"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  className="w-full bg-slate-950/50 border border-slate-800 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 rounded-2xl py-4 pl-12 pr-12 outline-none transition-all placeholder:text-slate-600"
+                />
+                <button 
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors"
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
+              </div>
+            </div>
+
+            <button 
+              type="submit" 
+              className="w-full !bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2 group mt-4"
+            >
+              Sign In to Dashboard
+              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </form>
+
+          <div className="mt-8 pt-8 border-t border-slate-800 text-center">
+            <p className="text-slate-400 text-sm">
+              Don't have an account?{' '}
+              <button className="text-blue-500 font-bold hover:underline">Register now</button>
+            </p>
+          </div>
+        </div>
+
+        {/* Footer info */}
+        <div className="mt-12 text-center text-slate-500 text-xs">
+          © 2026 CivicConnect. Secure Gateway • Encrypted Access
         </div>
       </div>
     </div>
   );
+};
+
+// Wrapper component to provide Router context if rendered standalone
+const LoginPage = () => {
+  const inRouter = useInRouterContext();
+  
+  // If the component is rendered directly (e.g. testing or misconfigured main.jsx),
+  // wrap it with a fallback BrowserRouter to prevent useLocation/useNavigate from crashing.
+  if (!inRouter) {
+    return (
+      <BrowserRouter>
+        <LoginPageContent />
+      </BrowserRouter>
+    );
+  }
+  
+  // If it's already inside a router (like App.jsx), just render normally.
+  return <LoginPageContent />;
+};
+
+export default LoginPage;

@@ -1,607 +1,430 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
-  MapPin, 
-  Camera, 
-  CheckCircle, 
-  AlertTriangle, 
-  Clock, 
-  Menu, 
-  X, 
-  ChevronRight, 
-  User, 
-  Building2, 
-  HardHat, 
-  BarChart3, 
-  ShieldCheck, 
-  Smartphone,
-  Search,
-  LogIn
+  Camera, MapPin, ShieldCheck, ArrowRight, BarChart3, 
+  Users, UserCircle2, Building2, HardHat, CheckCircle2,
+  Activity, AlertTriangle, Search, ChevronRight
 } from 'lucide-react';
 
 const LandingPage = () => {
-  const [currentPage, setCurrentPage] = useState('home');
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
 
-  // Handle scroll effect for navbar
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Navigation handler
-  const navigateTo = (page) => {
-    setCurrentPage(page);
-    setIsMenuOpen(false);
-    window.scrollTo(0, 0);
+  // Helper function to navigate to login with a specific role
+  const handleLogin = (role = 'citizen') => {
+    navigate('/login', { state: { role } });
   };
 
-  // --- SUB-PAGES ---
-  const LoginPage = () => (
-    <div className="min-h-screen pt-24 pb-12 px-4 bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
-      <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-blue-900 dark:text-blue-400">Welcome Back</h2>
-          <p className="text-gray-600 dark:text-gray-300 mt-2">Select your login type</p>
-        </div>
-        <div className="space-y-4">
-          <button className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition flex items-center justify-center gap-2">
-            <User size={20} /> Citizen Login
-          </button>
-          <button className="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold transition flex items-center justify-center gap-2">
-            <Building2 size={20} /> Government Official
-          </button>
-          <button className="w-full py-3 px-4 border-2 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 text-gray-700 dark:text-gray-200 rounded-lg font-semibold transition flex items-center justify-center gap-2">
-            <HardHat size={20} /> Field Worker
-          </button>
-        </div>
-        <div className="mt-6 text-center">
-          <button onClick={() => navigateTo('home')} className="text-blue-600 dark:text-blue-400 hover:underline">
-            Back to Home
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-
-  const ReportIssuePage = () => (
-    <div className="min-h-screen pt-24 pb-12 px-4 bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8">
-        <h2 className="text-2xl font-bold text-blue-900 dark:text-blue-400 mb-6 flex items-center gap-2">
-          <AlertTriangle className="text-red-500" /> Report an Issue
-        </h2>
-        <form className="space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Issue Category</label>
-            <select className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
-              <option>Select Category...</option>
-              <option>Pothole / Road Damage</option>
-              <option>Garbage / Sanitation</option>
-              <option>Streetlight Failure</option>
-              <option>Water Leakage</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
-            <textarea className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none h-32" placeholder="Describe the issue..."></textarea>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-             <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition">
-                <Camera size={32} />
-                <span className="mt-2 text-sm">Upload Photo/Video</span>
-             </div>
-             <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition">
-                <MapPin size={32} />
-                <span className="mt-2 text-sm">Tag Location</span>
-             </div>
-          </div>
-          <button type="button" className="w-full py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition">
-            Submit Report
-          </button>
-          <button onClick={() => navigateTo('home')} className="w-full py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition">
-            Cancel
-          </button>
-        </form>
-      </div>
-    </div>
-  );
-
-  const TrackIssuePage = () => (
-    <div className="min-h-screen pt-24 pb-12 px-4 bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
-      <div className="max-w-lg w-full bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
-        <h2 className="text-2xl font-bold text-blue-900 dark:text-blue-400 mb-4 flex items-center gap-2">
-          <Search /> Track Your Complaint
-        </h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-6">Enter your Complaint ID to check the real-time status of your report.</p>
-        <div className="flex gap-2 mb-6">
-          <input type="text" placeholder="e.g., CIV-2024-8892" className="flex-1 p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg outline-none focus:ring-2 focus:ring-blue-500" />
-          <button className="bg-blue-600 text-white px-6 rounded-lg font-semibold hover:bg-blue-700 transition">Track</button>
-        </div>
-        <button onClick={() => navigateTo('home')} className="text-blue-600 dark:text-blue-400 hover:underline block mx-auto">
-          Back to Home
-        </button>
-      </div>
-    </div>
-  );
-
-  // --- MAIN LANDING PAGE SECTIONS ---
-
-  // 1. Header
-  const Header = () => (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white dark:bg-gray-900 shadow-md py-3' : 'bg-transparent py-5'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-        {/* Logo */}
-        <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigateTo('home')}>
-          <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
-            C
-          </div>
-          <div className={`font-bold text-xl transition-colors duration-300 ${scrolled ? 'text-gray-900 dark:text-white' : 'text-white'}`}>
-            Civic<span className="text-blue-400">Connect</span>
-          </div>
-        </div>
-
-        {/* Desktop Nav - Transparent by default, hovers added, dynamic text color */}
-        <nav className="hidden md:flex items-center gap-6">
-          {['Home', 'How It Works', 'About'].map((item) => (
-            <button 
-              key={item} 
-              onClick={() => navigateTo('home')}
-              className={`font-medium px-3 py-2 rounded-lg transition-all duration-200 bg-transparent ${
-                scrolled 
-                  ? 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800' 
-                  : 'text-white hover:bg-white/10'
-              }`}
-            >
-              {item}
-            </button>
-          ))}
-          <button 
-             onClick={() => navigateTo('track')}
-             className={`font-medium px-3 py-2 rounded-lg transition-all duration-200 bg-transparent ${
-                scrolled 
-                  ? 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800' 
-                  : 'text-white hover:bg-white/10'
-             }`}
-          >
-            Track Issue
-          </button>
-        </nav>
-
-        {/* Auth Buttons Desktop */}
-        <div className="hidden md:flex items-center gap-4">
-          <button 
-            onClick={() => navigateTo('login')}
-            className={`font-semibold px-4 py-2 rounded-lg transition-all duration-200 bg-transparent ${
-              scrolled 
-                ? 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800' 
-                : 'text-white hover:bg-white/10'
-            }`}
-          >
-            Login
-          </button>
-          <button 
-            onClick={() => navigateTo('report')}
-            className="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-full font-bold shadow-lg transition transform hover:scale-105 flex items-center gap-2"
-          >
-            <AlertTriangle size={18} /> Report Issue
-          </button>
-        </div>
-
-        {/* Mobile Menu Toggle */}
-        <button className="md:hidden p-2 rounded-lg transition-colors focus:outline-none" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {isMenuOpen 
-            ? <X size={28} className={scrolled ? 'text-gray-900 dark:text-white' : 'text-white'} /> 
-            : <Menu size={28} className={scrolled ? 'text-gray-900 dark:text-white' : 'text-white'} />
-          }
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-white dark:bg-gray-900 shadow-xl py-4 px-4 flex flex-col gap-2 border-t dark:border-gray-800">
-          <button onClick={() => navigateTo('home')} className="text-left py-3 px-4 rounded-lg font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800">Home</button>
-          <button onClick={() => navigateTo('track')} className="text-left py-3 px-4 rounded-lg font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800">Track Issue</button>
-          <button onClick={() => navigateTo('login')} className="text-left py-3 px-4 rounded-lg font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800">Login</button>
-          <button onClick={() => navigateTo('report')} className="bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg font-bold text-center mt-2 transition">Report Issue</button>
-        </div>
-      )}
-    </header>
-  );
-
-  // 2. Hero Section
-  const Hero = () => (
-    <section className="relative min-h-[90vh] flex items-center pt-20 pb-32 overflow-hidden">
-      {/* Background with overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 z-0">
-        {/* Abstract city pattern */}
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
-      </div>
-      
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
-        <div className="text-white space-y-6">
-          <div className="inline-block bg-blue-500/20 backdrop-blur-sm border border-blue-400/30 px-4 py-1 rounded-full text-blue-100 text-sm font-medium">
-            AI-Powered Civic Management
-          </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
-            Report Civic Issues. <br/>
-            <span className="text-blue-400">Track Resolution.</span> <br/>
-            Improve Your City.
-          </h1>
-          <p className="text-lg text-blue-100 max-w-lg">
-            A transparent, AI-driven platform connecting citizens with the government to solve urban problems like potholes, waste, and lighting in real-time.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <button 
-              onClick={() => navigateTo('report')}
-              className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-lg font-bold shadow-xl transition transform hover:scale-105 flex items-center justify-center gap-2"
-            >
-              <Camera size={20} /> Report an Issue
-            </button>
-            <button 
-              onClick={() => navigateTo('track')}
-              className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-blue-200/50 px-8 py-4 rounded-lg font-bold shadow-xl transition flex items-center justify-center gap-2"
-            >
-              <Search size={20} /> Track Complaint
-            </button>
-          </div>
-        </div>
-
-        {/* Hero Visual Mockup */}
-        <div className="hidden md:block relative">
-           <div className="relative z-10 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-4 transform rotate-2 hover:rotate-0 transition duration-500">
-              <div className="bg-gray-100 dark:bg-gray-900 rounded-xl h-64 w-full flex items-center justify-center relative overflow-hidden">
-                 <div className="absolute inset-0 flex items-center justify-center text-gray-300 dark:text-gray-700">
-                    <MapPin size={120} className="opacity-20" />
-                 </div>
-                 {/* Floating UI Elements */}
-                 <div className="absolute top-4 left-4 bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg flex items-center gap-3 border border-gray-100 dark:border-gray-700">
-                    <div className="bg-green-100 dark:bg-green-900/50 p-2 rounded-full text-green-600 dark:text-green-400"><CheckCircle size={20} /></div>
-                    <div>
-                       <p className="text-xs text-gray-500 dark:text-gray-400">Status</p>
-                       <p className="font-bold text-sm text-gray-800 dark:text-gray-100">Pothole Repaired</p>
-                    </div>
-                 </div>
-                 <div className="absolute bottom-4 right-4 bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg flex items-center gap-3 border border-gray-100 dark:border-gray-700">
-                    <div className="bg-orange-100 dark:bg-orange-900/50 p-2 rounded-full text-orange-600 dark:text-orange-400"><Clock size={20} /></div>
-                    <div>
-                       <p className="text-xs text-gray-500 dark:text-gray-400">Avg Response</p>
-                       <p className="font-bold text-sm text-gray-800 dark:text-gray-100">24 Hours</p>
-                    </div>
-                 </div>
-              </div>
-              <div className="mt-4 space-y-2">
-                 <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
-                 <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
-              </div>
-           </div>
-        </div>
-      </div>
-      
-      {/* Wave shape divider */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-0">
-        <svg className="relative block w-full h-[100px] text-white dark:text-gray-900 rotate-180" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="currentColor"></path>
-        </svg>
-      </div>
-    </section>
-  );
-
-  // 3. Problem Statement
-  const Problems = () => (
-    <section className="py-20 bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Why This System is Needed?</h2>
-        <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12">
-          Traditional reporting is slow, opaque, and uncoordinated. We tackle the most common civic issues head-on.
-        </p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {[
-            { icon: <div className="bg-orange-600 dark:bg-orange-400 h-2 w-8 rounded-full"></div>, label: 'Potholes', color: 'bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400' },
-            { icon: <div className="w-6 h-8 border-2 border-current border-t-0 rounded-b-md"></div>, label: 'Garbage Overflow', color: 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400' },
-            { icon: <div className="w-6 h-6 rounded-full border-4 border-current border-t-transparent animate-spin-slow"></div>, label: 'Water Logging', color: 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400' },
-            { icon: <div className="w-1 h-8 bg-current relative"><div className="absolute -top-1 -left-2 w-5 h-5 bg-yellow-400 rounded-full opacity-50"></div></div>, label: 'Streetlights', color: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400' }
-          ].map((item, idx) => (
-            <div key={idx} className="p-6 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md transition bg-white dark:bg-gray-800 group">
-              <div className={`w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 text-2xl ${item.color} group-hover:scale-110 transition`}>
-                {item.icon}
-              </div>
-              <h3 className="font-semibold text-gray-800 dark:text-gray-200">{item.label}</h3>
+  return (
+    <div className="w-screen min-h-screen bg-[#0f172a] text-white font-sans selection:bg-blue-500/30 overflow-x-hidden">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 bg-[#0f172a]/80 backdrop-blur-md border-b border-slate-800 px-6 py-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="bg-blue-600 p-1.5 rounded-lg">
+              <span className="font-bold text-xl">C</span>
             </div>
-          ))}
+            <span className="font-bold text-xl tracking-tight text-blue-500">CivicConnect</span>
+          </div>
+          
+          <div className="hidden md:flex items-center gap-6">
+            <button className="text-sm font-medium hover:text-blue-400 transition-colors !bg-black px-4 py-2 rounded-lg">Home</button>
+            <button className="text-sm font-medium hover:text-blue-400 transition-colors !bg-black px-4 py-2 rounded-lg">How It Works</button>
+            <button className="text-sm font-medium hover:text-blue-400 transition-colors !bg-black px-4 py-2 rounded-lg">About</button>
+            <button className="text-sm font-medium hover:text-blue-400 transition-colors !bg-black px-4 py-2 rounded-lg">Track Issue</button>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={() => handleLogin('citizen')}
+              className="text-sm font-medium hover:text-blue-400 transition-colors !bg-black px-4 py-2 rounded-lg"
+            >
+              Login
+            </button>
+            <button className="text-sm font-medium hover:text-orange-400 transition-colors !bg-black px-4 py-2 rounded-lg hover:border-blue-500 flex items-center gap-2 transition-all">
+              <AlertTriangle className="w-4 h-4 text-orange-400" />
+              Report Issue
+            </button>
+          </div>
         </div>
-      </div>
-    </section>
-  );
+      </nav>
 
-  // 4. How It Works
-  const HowItWorks = () => (
-    <section className="py-20 bg-gray-50 dark:bg-gray-800/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <span className="text-blue-600 dark:text-blue-400 font-bold tracking-wide uppercase text-sm">Workflow</span>
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mt-2">How It Works</h2>
-        </div>
-
-        <div className="grid md:grid-cols-5 gap-4 relative">
-          {/* Connector Line (Desktop) */}
-          <div className="hidden md:block absolute top-12 left-0 w-full h-1 bg-gray-200 dark:bg-gray-700 -z-10"></div>
-
-          {[
-            { step: '01', title: 'Report', desc: 'Citizen snaps a photo & tags location.', icon: <Camera size={24} /> },
-            { step: '02', title: 'AI Routing', desc: 'System classifies & assigns department.', icon: <Smartphone size={24} /> },
-            { step: '03', title: 'Assignment', desc: 'Field worker gets the task on app.', icon: <User size={24} /> },
-            { step: '04', title: 'Resolution', desc: 'Worker uploads "After" photo proof.', icon: <CheckCircle size={24} /> },
-            { step: '05', title: 'Notification', desc: 'Citizen gets alerted of fix.', icon: <AlertTriangle size={24} /> },
-          ].map((item, idx) => (
-            <div key={idx} className="flex flex-col items-center text-center group">
-              <div className="w-24 h-24 bg-white dark:bg-gray-900 border-4 border-blue-50 dark:border-gray-800 rounded-full flex items-center justify-center shadow-sm mb-6 relative group-hover:border-blue-500 dark:group-hover:border-blue-500 transition duration-300">
-                <span className="absolute -top-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full">{item.step}</span>
-                <div className="text-blue-600 dark:text-blue-400">{item.icon}</div>
-              </div>
-              <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-2">{item.title}</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 px-2">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-
-  // 5. Key Features
-  const Features = () => (
-    <section className="py-20 bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden pt-20 pb-32 px-6">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(37,99,235,0.1),transparent_50%)]"></div>
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10">
           <div className="space-y-8">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Built for Transparency & Speed</h2>
-            <div className="space-y-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-wider">
+              AI-Powered Civic Management
+            </div>
+            <h1 className="text-5xl lg:text-7xl font-bold leading-tight tracking-tight">
+              Report Civic Issues. <br />
+              <span className="text-blue-500">Track Resolution.</span> <br />
+              Improve Your City.
+            </h1>
+            <p className="text-slate-400 text-lg max-w-lg leading-relaxed">
+              A transparent, AI-driven platform connecting citizens with the government to solve urban problems like potholes, waste, and lighting in real-time.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <button className="!bg-slate-800 hover:bg-slate-700 px-8 py-4 rounded-xl font-bold flex items-center gap-3 transition-all group">
+                <Camera className="w-5 h-5 text-blue-400 group-hover:scale-110 transition-transform" />
+                Report an Issue
+              </button>
+              <button className="!bg-transparent border border-slate-700 hover:border-slate-500 px-8 py-4 rounded-xl font-bold flex items-center gap-3 transition-all group">
+                <Search className="w-5 h-5 text-slate-400 group-hover:text-white transition-colors" />
+                Track Complaint
+              </button>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="bg-slate-800/40 border border-slate-700 rounded-3xl p-8 backdrop-blur-sm shadow-2xl">
+              <div className="flex justify-between items-start mb-12">
+                <div className="bg-white/5 border border-white/10 p-4 rounded-2xl flex items-center gap-4 animate-pulse">
+                  <div className="w-10 h-10 bg-emerald-500/20 rounded-full flex items-center justify-center">
+                    <CheckCircle2 className="w-6 h-6 text-emerald-500" />
+                  </div>
+                  <div>
+                    <div className="text-[10px] text-slate-400 uppercase font-bold tracking-widest">Status</div>
+                    <div className="font-bold text-emerald-400">Pothole Repaired</div>
+                  </div>
+                </div>
+              </div>
+              <div className="aspect-video bg-slate-900/50 rounded-2xl border border-slate-700 flex items-center justify-center mb-8">
+                 <MapPin className="w-16 h-16 text-slate-700 opacity-20" />
+              </div>
+              <div className="flex justify-end">
+                <div className="bg-white/5 border border-white/10 p-4 rounded-2xl flex items-center gap-4">
+                  <div className="w-10 h-10 bg-orange-500/20 rounded-full flex items-center justify-center">
+                    <Activity className="w-6 h-6 text-orange-500" />
+                  </div>
+                  <div>
+                    <div className="text-[10px] text-slate-400 uppercase font-bold tracking-widest">Avg Response</div>
+                    <div className="font-bold text-orange-400">24 Hours</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* Background blobs for depth */}
+            <div className="absolute -z-10 -bottom-12 -right-12 w-64 h-64 bg-blue-600/20 rounded-full blur-[100px]"></div>
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#0f172a] to-transparent"></div>
+      </section>
+
+      {/* Why This System Needed */}
+      <section className="py-24 px-6 bg-slate-900/30">
+        <div className="max-w-7xl mx-auto text-center space-y-4 mb-16">
+          <h2 className="text-4xl font-bold">Why This System is Needed?</h2>
+          <p className="text-slate-400 max-w-2xl mx-auto">
+            Traditional reporting is slow, opaque, and uncoordinated. We tackle the most common civic issues head-on.
+          </p>
+        </div>
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            { title: 'Potholes', color: 'text-orange-500', bg: 'bg-orange-500/10' },
+            { title: 'Garbage Overflow', color: 'text-emerald-500', bg: 'bg-emerald-500/10' },
+            { title: 'Water Logging', color: 'text-blue-500', bg: 'bg-blue-500/10' },
+            { title: 'Streetlights', color: 'text-yellow-500', bg: 'bg-yellow-500/10' },
+          ].map((item, i) => (
+            <div key={i} className="bg-slate-800/50 border border-slate-700 p-8 rounded-3xl hover:border-blue-500/50 transition-all text-center group">
+              <div className={`w-12 h-12 ${item.bg} rounded-2xl mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                <div className={`w-6 h-1 bg-current ${item.color} rounded-full`}></div>
+              </div>
+              <h3 className="font-bold text-xl">{item.title}</h3>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-24 px-6 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto text-center space-y-4 mb-20">
+          <span className="text-blue-500 font-bold text-xs uppercase tracking-widest">Workflow</span>
+          <h2 className="text-4xl font-bold">How It Works</h2>
+        </div>
+        
+        <div className="max-w-7xl mx-auto relative">
+          <div className="hidden lg:block absolute top-10 left-0 w-full h-0.5 bg-slate-800"></div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 text-center relative z-10">
+            {[
+              { id: '01', icon: Camera, title: 'Report', desc: 'Citizen snaps a photo & tags location.' },
+              { id: '02', icon: Activity, title: 'AI Routing', desc: 'System classifies & assigns department.' },
+              { id: '03', icon: UserCircle2, title: 'Assignment', desc: 'Field worker gets the task on app.' },
+              { id: '04', icon: CheckCircle2, title: 'Resolution', desc: 'Worker uploads "After" photo proof.' },
+              { id: '05', icon: AlertTriangle, title: 'Notification', desc: 'Citizen gets alerted of fix.' },
+            ].map((step, i) => (
+              <div key={i} className="space-y-6">
+                <div className="relative inline-block">
+                  <div className="absolute -top-3 -right-3 w-6 h-6 bg-blue-600 rounded-full text-[10px] flex items-center justify-center font-bold">
+                    {step.id}
+                  </div>
+                  <div className="w-20 h-20 bg-slate-800 border border-slate-700 rounded-full flex items-center justify-center mx-auto text-blue-400">
+                    <step.icon className="w-8 h-8" />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <h3 className="font-bold text-xl">{step.title}</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">{step.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Built for Transparency */}
+      <section className="py-24 px-6 bg-slate-900/30">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+          <div className="space-y-12">
+            <h2 className="text-4xl font-bold leading-tight">Built for Transparency & Speed</h2>
+            <div className="space-y-8">
               {[
                 { title: 'AI-Based Classification', desc: 'Automatically detects issue type from images using Computer Vision.' },
                 { title: 'Real-Time Tracking', desc: 'Track the exact status of your complaint from submission to closure.' },
                 { title: 'Proof-of-Work', desc: 'Mandatory before/after photos ensure the work is actually done.' },
-                { title: 'Department Dashboards', desc: 'Dedicated analytics for government officials to monitor performance.' }
-              ].map((feat, idx) => (
-                <div key={idx} className="flex gap-4">
-                  <div className="flex-shrink-0 w-6 h-6 mt-1 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
-                    <CheckCircle size={14} />
+                { title: 'Department Dashboards', desc: 'Dedicated analytics for government officials to monitor performance.' },
+              ].map((feature, i) => (
+                <div key={i} className="flex gap-6">
+                  <div className="mt-1">
+                    <div className="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center">
+                      <CheckCircle2 className="w-4 h-4 text-blue-500" />
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-bold text-gray-900 dark:text-gray-100">{feat.title}</h4>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">{feat.desc}</p>
+                  <div className="space-y-1">
+                    <h4 className="font-bold text-lg">{feature.title}</h4>
+                    <p className="text-slate-400 leading-relaxed text-sm">{feature.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl p-8 grid grid-cols-2 gap-4">
-            <div className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm hover:shadow-md transition">
-               <BarChart3 className="text-blue-500 dark:text-blue-400 mb-3" size={32} />
-               <div className="text-2xl font-bold text-gray-800 dark:text-white">85%</div>
-               <div className="text-xs text-gray-500 dark:text-gray-300">Faster Resolution</div>
+          
+          <div className="grid grid-cols-2 gap-6">
+            <div className="space-y-6 mt-12">
+              <div className="bg-slate-800 border border-slate-700 p-8 rounded-3xl space-y-4 hover:border-blue-500/50 transition-colors">
+                <BarChart3 className="w-8 h-8 text-blue-400" />
+                <div>
+                  <div className="text-3xl font-bold">85%</div>
+                  <div className="text-xs text-slate-400 uppercase tracking-widest font-bold">Faster Resolution</div>
+                </div>
+              </div>
+              <div className="bg-slate-800 border border-slate-700 p-8 rounded-3xl space-y-4 hover:border-purple-500/50 transition-colors">
+                <Users className="w-8 h-8 text-purple-400" />
+                <div>
+                  <div className="text-3xl font-bold">50k+</div>
+                  <div className="text-xs text-slate-400 uppercase tracking-widest font-bold">Active Citizens</div>
+                </div>
+              </div>
             </div>
-            <div className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm hover:shadow-md transition mt-8">
-               <ShieldCheck className="text-emerald-500 dark:text-emerald-400 mb-3" size={32} />
-               <div className="text-2xl font-bold text-gray-800 dark:text-white">100%</div>
-               <div className="text-xs text-gray-500 dark:text-gray-300">Verified Fixes</div>
-            </div>
-            <div className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm hover:shadow-md transition">
-               <User className="text-purple-500 dark:text-purple-400 mb-3" size={32} />
-               <div className="text-2xl font-bold text-gray-800 dark:text-white">50k+</div>
-               <div className="text-xs text-gray-500 dark:text-gray-300">Active Citizens</div>
-            </div>
-            <div className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm hover:shadow-md transition mt-8">
-               <MapPin className="text-red-500 dark:text-red-400 mb-3" size={32} />
-               <div className="text-2xl font-bold text-gray-800 dark:text-white">12k</div>
-               <div className="text-xs text-gray-500 dark:text-gray-300">Issues Solved</div>
+            <div className="space-y-6">
+              <div className="bg-slate-800 border border-slate-700 p-8 rounded-3xl space-y-4 hover:border-emerald-500/50 transition-colors">
+                <ShieldCheck className="w-8 h-8 text-emerald-400" />
+                <div>
+                  <div className="text-3xl font-bold">100%</div>
+                  <div className="text-xs text-slate-400 uppercase tracking-widest font-bold">Verified Fixes</div>
+                </div>
+              </div>
+              <div className="bg-slate-800 border border-slate-700 p-8 rounded-3xl space-y-4 hover:border-rose-500/50 transition-colors">
+                <MapPin className="w-8 h-8 text-rose-400" />
+                <div>
+                  <div className="text-3xl font-bold">12k</div>
+                  <div className="text-xs text-slate-400 uppercase tracking-widest font-bold">Issues Solved</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  );
+      </section>
 
-  // 6. Live Map Preview
-  const LiveMap = () => (
-    <section className="py-20 bg-gray-900 text-white relative overflow-hidden">
-      <div className="absolute inset-0 bg-gray-800 opacity-50"></div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
-          <div>
-            <h2 className="text-3xl font-bold text-white">Live Issue Heatmap</h2>
-            <p className="text-gray-400 mt-2">Transparency in action. View issues reported in your area.</p>
+      {/* Live Issue Heatmap */}
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
+          <div className="space-y-4">
+            <h2 className="text-4xl font-bold">Live Issue Heatmap</h2>
+            <p className="text-slate-400">Transparency in action. View issues reported in your area.</p>
           </div>
-          <button className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg font-medium transition flex items-center gap-2 text-white">
-            View Full Map <ChevronRight size={18} />
+          <button className="!bg-slate-800 hover:bg-slate-700 px-6 py-3 rounded-xl font-bold flex items-center gap-2 transition-all group">
+            View Full Map
+            <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
         
-        {/* Mock Map UI */}
-        <div className="w-full h-96 bg-gray-800 rounded-2xl border border-gray-700 relative overflow-hidden group cursor-pointer">
-          <div className="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg')] bg-cover opacity-20 bg-center"></div>
-          
-          <div className="absolute top-1/4 left-1/4 animate-pulse">
-            <div className="w-4 h-4 bg-red-500 rounded-full shadow-[0_0_15px_rgba(239,68,68,0.8)]"></div>
-            <div className="absolute -top-8 -left-12 bg-white text-gray-900 text-xs py-1 px-2 rounded shadow opacity-0 group-hover:opacity-100 transition whitespace-nowrap">Pothole Reported</div>
-          </div>
-          <div className="absolute top-1/2 left-1/2">
-            <div className="w-4 h-4 bg-green-500 rounded-full shadow-[0_0_15px_rgba(34,197,94,0.8)]"></div>
-             <div className="absolute -top-8 -left-12 bg-white text-gray-900 text-xs py-1 px-2 rounded shadow opacity-0 group-hover:opacity-100 transition whitespace-nowrap">Resolved: Waste</div>
-          </div>
-          <div className="absolute bottom-1/3 right-1/4 animate-pulse">
-            <div className="w-4 h-4 bg-yellow-500 rounded-full shadow-[0_0_15px_rgba(234,179,8,0.8)]"></div>
-             <div className="absolute -top-8 -left-12 bg-white text-gray-900 text-xs py-1 px-2 rounded shadow opacity-0 group-hover:opacity-100 transition whitespace-nowrap">In Progress: Lights</div>
-          </div>
-
-          <div className="absolute bottom-4 left-4 bg-gray-900/90 p-4 rounded-lg border border-gray-700 backdrop-blur-sm">
-            <div className="flex items-center gap-3 text-sm text-white">
-              <span className="flex items-center gap-1"><span className="w-2 h-2 bg-red-500 rounded-full"></span> Open</span>
-              <span className="flex items-center gap-1"><span className="w-2 h-2 bg-yellow-500 rounded-full"></span> In Progress</span>
-              <span className="flex items-center gap-1"><span className="w-2 h-2 bg-green-500 rounded-full"></span> Resolved</span>
+        <div className="max-w-7xl mx-auto">
+          <div className="relative aspect-[21/9] bg-slate-900 border border-slate-800 rounded-[2rem] overflow-hidden group">
+            <div className="absolute inset-0 opacity-20 bg-[url('[https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg](https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg)')] bg-center bg-no-repeat bg-contain"></div>
+            
+            <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-red-500 rounded-full animate-ping"></div>
+            <div className="absolute top-1/2 left-1/3 w-3 h-3 bg-yellow-500 rounded-full animate-ping [animation-delay:1s]"></div>
+            <div className="absolute top-1/3 left-1/2 w-3 h-3 bg-emerald-500 rounded-full animate-ping [animation-delay:0.5s]"></div>
+            
+            <div className="absolute bottom-8 left-8 bg-[#0f172a]/90 backdrop-blur border border-slate-700 p-4 rounded-2xl flex items-center gap-6">
+              <div className="flex items-center gap-2 text-xs font-bold">
+                <div className="w-2.5 h-2.5 bg-red-500 rounded-full"></div> Open
+              </div>
+              <div className="flex items-center gap-2 text-xs font-bold">
+                <div className="w-2.5 h-2.5 bg-yellow-500 rounded-full"></div> In Progress
+              </div>
+              <div className="flex items-center gap-2 text-xs font-bold">
+                <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full"></div> Resolved
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  );
+      </section>
 
-  // 7. User Types
-  const UserTypes = () => (
-    <section className="py-20 bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Who is this for?</h2>
+      {/* Who is this for? */}
+      <section className="py-24 px-6 bg-slate-900/30">
+        <div className="max-w-7xl mx-auto text-center mb-16">
+          <h2 className="text-4xl font-bold">Who is this for?</h2>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
           {[
             { 
-              role: 'Citizens', 
-              icon: <User size={40} />, 
-              desc: 'Report issues, track status, and rate the resolution quality.',
-              action: 'Login as Citizen',
-              color: 'text-blue-600 dark:text-blue-400',
-              bg: 'bg-blue-50 dark:bg-blue-900/20'
+              roleId: 'citizen',
+              icon: UserCircle2, 
+              title: 'Citizens', 
+              desc: 'Report issues, track status, and rate the resolution quality.', 
+              btn: 'Login as Citizen', 
+              color: 'text-blue-500', 
+              bg: 'bg-blue-500/10' 
             },
             { 
-              role: 'Government', 
-              icon: <Building2 size={40} />, 
-              desc: 'Manage departments, view analytics, and oversee zone performance.',
-              action: 'Official Login',
-              color: 'text-indigo-600 dark:text-indigo-400',
-              bg: 'bg-indigo-50 dark:bg-indigo-900/20'
+              roleId: 'admin',
+              icon: Building2, 
+              title: 'Government', 
+              desc: 'Manage departments, view analytics, and oversee zone performance.', 
+              btn: 'Official Login', 
+              color: 'text-purple-500', 
+              bg: 'bg-purple-500/10' 
             },
             { 
-              role: 'Field Workers', 
-              icon: <HardHat size={40} />, 
-              desc: 'Receive tasks, navigate to locations, and upload proof of work.',
-              action: 'Worker App',
-              color: 'text-orange-600 dark:text-orange-400',
-              bg: 'bg-orange-50 dark:bg-orange-900/20'
-            }
-          ].map((user, idx) => (
-            <div key={idx} className="p-8 border border-gray-100 dark:border-gray-800 rounded-2xl bg-white dark:bg-gray-800 hover:shadow-xl transition duration-300 flex flex-col items-center text-center">
-              <div className={`w-20 h-20 rounded-full ${user.bg} ${user.color} flex items-center justify-center mb-6`}>
-                {user.icon}
+              roleId: 'worker',
+              icon: HardHat, 
+              title: 'Field Workers', 
+              desc: 'Receive tasks, navigate to locations, and upload proof of work.', 
+              btn: 'Worker Login', 
+              color: 'text-orange-500', 
+              bg: 'bg-orange-500/10' 
+            },
+          ].map((role, i) => (
+            <div key={i} className="bg-slate-800 border border-slate-700 p-10 rounded-3xl text-center space-y-6 hover:border-slate-500 transition-all flex flex-col items-center">
+              <div className={`w-16 h-16 ${role.bg} ${role.color} rounded-2xl flex items-center justify-center`}>
+                <role.icon className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{user.role}</h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-6 flex-grow">{user.desc}</p>
+              <h3 className="text-2xl font-bold">{role.title}</h3>
+              <p className="text-slate-400 leading-relaxed text-sm">
+                {role.desc}
+              </p>
               <button 
-                onClick={() => navigateTo('login')}
-                className={`font-semibold ${user.color} hover:underline`}
+                onClick={() => handleLogin(role.roleId)}
+                className="text-sm font-bold !bg-slate-800 text-slate-400 hover:text-white transition-colors flex items-center gap-2 group"
               >
-                {user.action} &rarr;
+                {role.btn}
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           ))}
         </div>
-      </div>
-    </section>
-  );
+      </section>
 
-  // 8. CTA
-  const CTA = () => (
-    <section className="py-20 bg-blue-600 dark:bg-blue-800 relative overflow-hidden">
-      <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-      <div className="max-w-4xl mx-auto px-4 text-center relative z-10 text-white">
-        <h2 className="text-4xl font-bold mb-6">Be a Responsible Citizen. Help Improve Your City.</h2>
-        <p className="text-xl text-blue-100 mb-10">Join thousands of others making a difference today. It only takes a minute to report.</p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button 
-            onClick={() => navigateTo('report')}
-            className="bg-white text-blue-700 px-8 py-4 rounded-lg font-bold shadow-lg hover:bg-gray-100 transition transform hover:-translate-y-1"
-          >
-            Report an Issue Now
-          </button>
-          <button 
-            onClick={() => navigateTo('login')}
-            className="border-2 border-white text-white px-8 py-4 rounded-lg font-bold hover:bg-white/10 transition"
-          >
-            Login to Dashboard
-          </button>
+      {/* Final CTA */}
+      <section className="py-32 px-6 relative overflow-hidden">
+        <div className="absolute inset-0 bg-blue-600">
+           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:40px_40px]"></div>
         </div>
-      </div>
-    </section>
-  );
-
-  // 9. About
-  const About = () => (
-    <section className="py-20 bg-gray-50 dark:bg-gray-800">
-      <div className="max-w-3xl mx-auto px-4 text-center">
-        <div className="w-16 h-1 bg-blue-600 mx-auto mb-6"></div>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">About The Initiative</h2>
-        <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-          The <strong>Crowdsourced Civic Issue Reporting & Resolution System</strong> is a digital initiative aimed at bridging the gap between municipal bodies and citizens. By leveraging Artificial Intelligence, Cloud Computing, and Geo-tagging, we ensure that no civic grievance goes unheard. Our mission is to build cleaner, safer, and smarter cities through transparency and community participation.
-        </p>
-      </div>
-    </section>
-  );
-
-  // 10. Footer
-  const Footer = () => (
-    <footer className="bg-gray-900 text-gray-300 py-12 border-t border-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-4 gap-8">
-        <div>
-          <div className="flex items-center gap-2 mb-4 text-white">
-            <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center font-bold">C</div>
-            <span className="font-bold text-xl">CivicConnect</span>
+        <div className="max-w-4xl mx-auto text-center relative z-10 space-y-10">
+          <h2 className="text-5xl font-bold leading-tight">
+            Be a Responsible Citizen. <br /> Help Improve Your City.
+          </h2>
+          <p className="text-blue-100 text-xl">
+            Join thousands of others making a difference today. It only takes a minute to report.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <button className="!bg-white text-blue-600 px-10 py-5 rounded-2xl font-bold text-lg hover:bg-blue-50 transition-all shadow-xl">
+              Report an Issue Now
+            </button>
+            <button 
+              onClick={() => handleLogin('citizen')}
+              className="!bg-black text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-blue-900 transition-all shadow-xl"
+            >
+              Login to Dashboard
+            </button>
           </div>
-          <p className="text-sm text-gray-400">Empowering citizens to build better cities, one report at a time.</p>
         </div>
-        <div>
-          <h4 className="text-white font-bold mb-4">Quick Links</h4>
-          <ul className="space-y-2 text-sm">
-            <li><button onClick={() => navigateTo('home')} className="hover:text-blue-400">Home</button></li>
-            <li><button onClick={() => navigateTo('report')} className="hover:text-blue-400">Report Issue</button></li>
-            <li><button onClick={() => navigateTo('track')} className="hover:text-blue-400">Track Status</button></li>
-            <li><button onClick={() => navigateTo('login')} className="hover:text-blue-400">Login</button></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-white font-bold mb-4">Legal</h4>
-          <ul className="space-y-2 text-sm">
-            <li className="hover:text-blue-400 cursor-pointer">Privacy Policy</li>
-            <li className="hover:text-blue-400 cursor-pointer">Terms of Use</li>
-            <li className="hover:text-blue-400 cursor-pointer">SLA Guidelines</li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-white font-bold mb-4">Contact</h4>
-          <ul className="space-y-2 text-sm">
-            <li className="flex items-center gap-2"><MapPin size={16}/> Municipal Corp HQ, City Center</li>
-            <li className="flex items-center gap-2"><Smartphone size={16}/> Helpline: 1800-CIVIC-FIX</li>
-          </ul>
-        </div>
-      </div>
-      <div className="max-w-7xl mx-auto px-4 mt-12 pt-8 border-t border-gray-800 text-center text-xs text-gray-500">
-        &copy; 2024 CivicConnect Initiative. All rights reserved.
-      </div>
-    </footer>
-  );
+      </section>
 
-  return (
-    <div className="font-sans text-gray-800 dark:text-gray-200 overflow-x-hidden min-h-screen bg-white dark:bg-gray-900 m-0 p-0 flex flex-col">
-      <Header />
-      
-      {currentPage === 'home' && (
-        <main>
-          <Hero />
-          <Problems />
-          <HowItWorks />
-          <Features />
-          <LiveMap />
-          <UserTypes />
-          <CTA />
-          <About />
-        </main>
-      )}
+      {/* About Section */}
+      <section className="py-24 px-6 bg-[#0f172a] border-t border-slate-800">
+        <div className="max-w-4xl mx-auto text-center space-y-8">
+          <div className="w-12 h-1 bg-blue-600 mx-auto rounded-full"></div>
+          <h2 className="text-3xl font-bold">About The Initiative</h2>
+          <p className="text-slate-400 leading-relaxed text-lg">
+            The <span className="text-white font-bold">Crowdsourced Civic Issue Reporting & Resolution System</span> is a digital initiative aimed at bridging the gap between municipal bodies and citizens. By leveraging Artificial Intelligence, Cloud Computing, and Geo-tagging, we ensure that no civic grievance goes unheard. Our mission is to build cleaner, safer, and smarter cities through transparency and community participation.
+          </p>
+        </div>
+      </section>
 
-      {currentPage === 'login' && <LoginPage />}
-      {currentPage === 'report' && <ReportIssuePage />}
-      {currentPage === 'track' && <TrackIssuePage />}
+      {/* Footer */}
+      <footer className="bg-[#0f172a] border-t border-slate-800 pt-20 pb-10 px-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+          <div className="space-y-6">
+            <div className="flex items-center gap-2">
+              <div className="bg-blue-600 p-1.5 rounded-lg">
+                <span className="font-bold text-lg">C</span>
+              </div>
+              <span className="font-bold text-xl tracking-tight text-blue-500">CivicConnect</span>
+            </div>
+            <p className="text-slate-400 leading-relaxed">
+              Empowering citizens to build better cities, one report at a time.
+            </p>
+          </div>
 
-      <Footer />
+          <div className="space-y-6">
+            <h4 className="font-bold text-lg">Quick Links</h4>
+            <ul className="space-y-4">
+              <li><button className="text-slate-400 hover:text-white transition-colors !bg-black px-4 py-2 rounded-lg text-sm">Home</button></li>
+              <li><button className="text-slate-400 hover:text-white transition-colors !bg-black">Report Issue</button></li>
+              <li><button className="text-slate-400 hover:text-white transition-colors !bg-black">Track Status</button></li>
+              <li>
+                <button 
+                  onClick={() => handleLogin('citizen')}
+                  className="text-slate-400 hover:text-white transition-colors !bg-black"
+                >
+                  Login
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          <div className="space-y-6">
+            <h4 className="font-bold text-lg">Legal</h4>
+            <ul className="space-y-4">
+              <li><button className="text-slate-400 hover:text-white transition-colors !bg-black">Privacy Policy</button></li>
+              <li><button className="text-slate-400 hover:text-white transition-colors !bg-black">Terms of Use</button></li>
+              <li><button className="text-slate-400 hover:text-white transition-colors !bg-black">SLA Guidelines</button></li>
+            </ul>
+          </div>
+
+          <div className="space-y-6">
+            <h4 className="font-bold text-lg">Contact</h4>
+            <ul className="space-y-4 text-slate-400">
+              <li className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-blue-500 flex-shrink-0" />
+                <span>Municipal Corp HQ, City Center</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <Activity className="w-5 h-5 text-blue-500 flex-shrink-0" />
+                <span>Helpline: 1800-CIVIC-FIX</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto pt-10 border-t border-slate-800 text-center text-slate-500 text-sm">
+          © 2026 CivicConnect Initiative. All rights reserved.
+        </div>
+      </footer>
     </div>
   );
 };
