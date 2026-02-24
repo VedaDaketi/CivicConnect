@@ -41,7 +41,7 @@ const LandingPage = () => {
 
   // --- SUB-PAGES ---
   const LoginPage = () => (
-    <div className="min-h-screen pt-24 pb-12 px-4 bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+    <div className="min-h-screen w-screen left-0 right-0 pt-24 pb-12 px-4 bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
       <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-blue-900 dark:text-blue-400">Welcome Back</h2>
@@ -54,7 +54,7 @@ const LandingPage = () => {
           <button className="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold transition flex items-center justify-center gap-2">
             <Building2 size={20} /> Government Official
           </button>
-          <button className="w-full py-3 px-4 border-2 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 text-gray-700 dark:text-gray-200 rounded-lg font-semibold transition flex items-center justify-center gap-2">
+          <button className="w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-lg font-semibold transition flex items-center justify-center gap-2">
             <HardHat size={20} /> Field Worker
           </button>
         </div>
@@ -68,7 +68,7 @@ const LandingPage = () => {
   );
 
   const ReportIssuePage = () => (
-    <div className="min-h-screen pt-24 pb-12 px-4 bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen w-screen left-0 right-0 pt-24 pb-12 px-4 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8">
         <h2 className="text-2xl font-bold text-blue-900 dark:text-blue-400 mb-6 flex items-center gap-2">
           <AlertTriangle className="text-red-500" /> Report an Issue
@@ -110,7 +110,7 @@ const LandingPage = () => {
   );
 
   const TrackIssuePage = () => (
-    <div className="min-h-screen pt-24 pb-12 px-4 bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+    <div className="min-h-screen w-screen left-0 right-0 pt-24 pb-12 px-4 bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
       <div className="max-w-lg w-full bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
         <h2 className="text-2xl font-bold text-blue-900 dark:text-blue-400 mb-4 flex items-center gap-2">
           <Search /> Track Your Complaint
@@ -138,7 +138,7 @@ const LandingPage = () => {
           <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
             C
           </div>
-          <div className={`font-bold text-xl transition-colors duration-300 ${scrolled ? 'text-gray-900 dark:text-white' : 'text-white'}`}>
+          <div className={`font-bold text-xl transition-colors duration-300 ${scrolled ? 'text-gray-900 dark:text-white' : 'text-white dark:text-white'}`}>
             Civic<span className="text-blue-400">Connect</span>
           </div>
         </div>
@@ -146,25 +146,25 @@ const LandingPage = () => {
         {/* Desktop Nav - Transparent by default, hovers added, dynamic text color */}
         <nav className="hidden md:flex items-center gap-6">
           {['Home', 'How It Works', 'About'].map((item) => (
-            <button 
-              key={item} 
+            <button
+              key={item}
               onClick={() => navigateTo('home')}
-              className={`font-medium px-3 py-2 rounded-lg transition-all duration-200 bg-transparent ${
-                scrolled 
-                  ? 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800' 
-                  : 'text-white hover:bg-white/10'
-              }`}
+              className={`font-medium px-3 py-2 rounded-md transition duration-200 shadow-none bg-transparent focus:outline-none focus:ring-0 ${
+                  scrolled
+                    ? 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
+                    : 'text-white dark:text-white hover:bg-white/10 dark:hover:bg-white/10'
+                }`}
             >
               {item}
             </button>
           ))}
-          <button 
-             onClick={() => navigateTo('track')}
-             className={`font-medium px-3 py-2 rounded-lg transition-all duration-200 bg-transparent ${
-                scrolled 
-                  ? 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800' 
-                  : 'text-white hover:bg-white/10'
-             }`}
+          <button
+            onClick={() => navigateTo('track')}
+            className={`font-medium px-3 py-2 rounded-md transition duration-200 shadow-none bg-transparent focus:outline-none focus:ring-0 ${
+              scrolled
+                ? 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
+                : 'text-white dark:text-white hover:bg-white/10 dark:hover:bg-white/10'
+            }`}
           >
             Track Issue
           </button>
@@ -174,11 +174,7 @@ const LandingPage = () => {
         <div className="hidden md:flex items-center gap-4">
           <button 
             onClick={() => navigateTo('login')}
-            className={`font-semibold px-4 py-2 rounded-lg transition-all duration-200 bg-transparent ${
-              scrolled 
-                ? 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800' 
-                : 'text-white hover:bg-white/10'
-            }`}
+            className="font-semibold px-4 py-2 rounded-lg transition-all duration-200 bg-white dark:bg-white/10 text-blue-700 dark:text-blue-200 hover:bg-gray-100 dark:hover:bg-white/20"
           >
             Login
           </button>
@@ -193,8 +189,8 @@ const LandingPage = () => {
         {/* Mobile Menu Toggle */}
         <button className="md:hidden p-2 rounded-lg transition-colors focus:outline-none" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen 
-            ? <X size={28} className={scrolled ? 'text-gray-900 dark:text-white' : 'text-white'} /> 
-            : <Menu size={28} className={scrolled ? 'text-gray-900 dark:text-white' : 'text-white'} />
+            ? <X size={28} className={scrolled ? 'text-gray-900 dark:text-white' : 'text-white dark:text-white'} /> 
+            : <Menu size={28} className={scrolled ? 'text-gray-900 dark:text-white' : 'text-white dark:text-white'} />
           }
         </button>
       </div>
@@ -213,7 +209,7 @@ const LandingPage = () => {
 
   // 2. Hero Section
   const Hero = () => (
-    <section className="relative min-h-[90vh] flex items-center pt-20 pb-32 overflow-hidden">
+    <section className="relative w-screen left-0 right-0 min-h-[90vh] flex items-center pt-20 pb-32 overflow-hidden">
       {/* Background with overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 z-0">
         {/* Abstract city pattern */}
@@ -234,15 +230,15 @@ const LandingPage = () => {
             A transparent, AI-driven platform connecting citizens with the government to solve urban problems like potholes, waste, and lighting in real-time.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <button 
+            <button
               onClick={() => navigateTo('report')}
               className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-lg font-bold shadow-xl transition transform hover:scale-105 flex items-center justify-center gap-2"
             >
               <Camera size={20} /> Report an Issue
             </button>
-            <button 
+            <button
               onClick={() => navigateTo('track')}
-              className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-blue-200/50 px-8 py-4 rounded-lg font-bold shadow-xl transition flex items-center justify-center gap-2"
+              className="bg-white text-blue-700 border border-white/20 px-8 py-4 rounded-lg font-bold shadow-xl transition flex items-center justify-center gap-2"
             >
               <Search size={20} /> Track Complaint
             </button>
@@ -251,30 +247,30 @@ const LandingPage = () => {
 
         {/* Hero Visual Mockup */}
         <div className="hidden md:block relative">
-           <div className="relative z-10 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-4 transform rotate-2 hover:rotate-0 transition duration-500">
-              <div className="bg-gray-100 dark:bg-gray-900 rounded-xl h-64 w-full flex items-center justify-center relative overflow-hidden">
-                 <div className="absolute inset-0 flex items-center justify-center text-gray-300 dark:text-gray-700">
+            <div className="relative z-10 bg-white rounded-2xl shadow-2xl p-4 transform rotate-2 hover:rotate-0 transition duration-500">
+              <div className="bg-gray-100 rounded-xl h-64 w-full flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 flex items-center justify-center text-gray-300">
                     <MapPin size={120} className="opacity-20" />
                  </div>
                  {/* Floating UI Elements */}
-                 <div className="absolute top-4 left-4 bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg flex items-center gap-3 border border-gray-100 dark:border-gray-700">
-                    <div className="bg-green-100 dark:bg-green-900/50 p-2 rounded-full text-green-600 dark:text-green-400"><CheckCircle size={20} /></div>
+                  <div className="absolute top-4 left-4 bg-white p-3 rounded-lg shadow-lg flex items-center gap-3 border border-gray-100">
+                    <div className="bg-green-100 p-2 rounded-full text-green-600"><CheckCircle size={20} /></div>
                     <div>
-                       <p className="text-xs text-gray-500 dark:text-gray-400">Status</p>
-                       <p className="font-bold text-sm text-gray-800 dark:text-gray-100">Pothole Repaired</p>
+                      <p className="text-xs text-gray-500">Status</p>
+                      <p className="font-bold text-sm text-gray-800">Pothole Repaired</p>
                     </div>
-                 </div>
-                 <div className="absolute bottom-4 right-4 bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg flex items-center gap-3 border border-gray-100 dark:border-gray-700">
-                    <div className="bg-orange-100 dark:bg-orange-900/50 p-2 rounded-full text-orange-600 dark:text-orange-400"><Clock size={20} /></div>
+                  </div>
+                  <div className="absolute bottom-4 right-4 bg-white p-3 rounded-lg shadow-lg flex items-center gap-3 border border-gray-100">
+                    <div className="bg-orange-100 p-2 rounded-full text-orange-600"><Clock size={20} /></div>
                     <div>
-                       <p className="text-xs text-gray-500 dark:text-gray-400">Avg Response</p>
-                       <p className="font-bold text-sm text-gray-800 dark:text-gray-100">24 Hours</p>
+                      <p className="text-xs text-gray-500">Avg Response</p>
+                      <p className="font-bold text-sm text-gray-800">24 Hours</p>
                     </div>
-                 </div>
+                  </div>
               </div>
-              <div className="mt-4 space-y-2">
-                 <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
-                 <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+                <div className="mt-4 space-y-2">
+                <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                <div className="h-4 bg-gray-200 rounded w-1/2"></div>
               </div>
            </div>
         </div>
@@ -291,10 +287,10 @@ const LandingPage = () => {
 
   // 3. Problem Statement
   const Problems = () => (
-    <section className="py-20 bg-white dark:bg-gray-900">
+    <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Why This System is Needed?</h2>
-        <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12">
+        <h2 className="text-3xl font-bold text-gray-900 mb-4">Why This System is Needed?</h2>
+        <p className="text-gray-600 max-w-2xl mx-auto mb-12">
           Traditional reporting is slow, opaque, and uncoordinated. We tackle the most common civic issues head-on.
         </p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
