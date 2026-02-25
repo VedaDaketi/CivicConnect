@@ -1,25 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate, useInRouterContext, BrowserRouter } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { 
-  UserCircle2, Building2, HardHat, Mail, Lock, 
+  UserCircle2, Building2, HardHat, Mail, Lock, User,
   ArrowLeft, Eye, EyeOff, ChevronRight
 } from 'lucide-react';
 
-const LoginPageContent = () => {
+const RegisterPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   
-  // Safely extract the role from the navigation state, defaulting to 'citizen'
   const initialRole = location.state?.role || 'citizen';
-  
   const [selectedRole, setSelectedRole] = useState(initialRole);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
     password: ''
   });
 
-  // Keep state synced if location state changes
   useEffect(() => {
     if (location.state?.role) {
       setSelectedRole(location.state.role);
@@ -27,27 +25,9 @@ const LoginPageContent = () => {
   }, [location.state?.role]);
 
   const roles = [
-    { 
-      id: 'citizen', 
-      title: 'Citizen', 
-      icon: UserCircle2, 
-      color: 'blue',
-      desc: 'Report and track issues in your neighborhood'
-    },
-    { 
-      id: 'admin', 
-      title: 'Government', 
-      icon: Building2, 
-      color: 'purple',
-      desc: 'Official portal for department and zone management'
-    },
-    { 
-      id: 'worker', 
-      title: 'Field Worker', 
-      icon: HardHat, 
-      color: 'orange',
-      desc: 'Access tasks and submit proof-of-work'
-    }
+    { id: 'citizen', title: 'Citizen', icon: UserCircle2, color: 'blue' },
+    { id: 'admin', title: 'Government', icon: Building2, color: 'purple' },
+    { id: 'worker', title: 'Field Worker', icon: HardHat, color: 'orange' }
   ];
 
   const handleInputChange = (e) => {
@@ -57,14 +37,13 @@ const LoginPageContent = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(`Logging in as ${selectedRole}:`, formData);
-    // Logic for redirection based on role would go here
+    console.log(`Registering as ${selectedRole}:`, formData);
   };
 
   return (
     <div className="w-screen h-screen bg-[#0f172a] text-white font-sans flex flex-col items-center justify-center p-6 relative overflow-hidden">
       
-      {/* Background Decorative Elements */}
+      {/* Background Blobs */}
       <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
       <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none"></div>
 
@@ -81,8 +60,7 @@ const LoginPageContent = () => {
         </button>
       </div>
 
-      {/* Login Container */}
-      <div className="w-full max-w-xl relative z-10 mt-16 md:mt-0 max-h-[90vh] overflow-y-auto">
+      <div className="w-full max-w-xl relative z-10 mt-20 md:mt-0 max-h-[90vh] overflow-y-auto">
         <div className="text-center mb-10 space-y-2">
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="bg-blue-600 p-2 rounded-xl">
@@ -90,12 +68,11 @@ const LoginPageContent = () => {
             </div>
             <span className="font-bold text-2xl tracking-tight text-blue-500">CivicConnect</span>
           </div>
-          <h2 className="text-3xl font-bold">Welcome Back</h2>
-          <p className="text-slate-400">Please select your role and sign in to your portal</p>
+          <h1 className="text-3xl font-bold">Create an Account</h1>
+          <p className="text-slate-400">Join us to make a difference in your city</p>
         </div>
 
-        {/* Role Selection */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           {roles.map((role) => {
             const Icon = role.icon;
             const isActive = selectedRole === role.id;
@@ -109,9 +86,7 @@ const LoginPageContent = () => {
                   : '!bg-slate-900/50 border-slate-800 hover:border-slate-700'
                 }`}
               >
-                <div className={`p-3 rounded-xl mb-3 ${
-                  isActive ? `bg-${role.color}-500/20 text-${role.color}-400` : 'bg-slate-800 text-slate-500'
-                }`}>
+                <div className={`p-3 rounded-xl mb-3 ${isActive ? `bg-${role.color}-500/20 text-${role.color}-400` : 'bg-slate-800 text-slate-500'}`}>
                   <Icon className="w-6 h-6" />
                 </div>
                 <span className={`text-sm font-bold ${isActive ? 'text-white' : 'text-slate-400'}`}>
@@ -122,14 +97,27 @@ const LoginPageContent = () => {
           })}
         </div>
 
-        {/* Form Card */}
         <div className="bg-slate-900/80 border border-slate-800 p-8 rounded-[2.5rem] backdrop-blur-xl shadow-2xl">
           <form onSubmit={handleSubmit} className="space-y-6">
+            
             <div className="space-y-2 text-sm text-slate-400 font-medium px-1">
-              Currently logging in as: <span className="text-blue-400 font-bold capitalize">{selectedRole}</span>
+              Currently registering as: <span className="text-blue-400 font-bold capitalize">{selectedRole}</span>
             </div>
 
-            {/* Email Field */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-slate-300 ml-1">Full Name</label>
+              <div className="relative group">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-blue-400 transition-colors">
+                  <User className="w-5 h-5" />
+                </div>
+                <input 
+                  type="text" name="name" required placeholder="John Doe"
+                  value={formData.name} onChange={handleInputChange}
+                  className="w-full bg-slate-950/50 border border-slate-800 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 rounded-2xl py-4 pl-12 pr-4 outline-none transition-all placeholder:text-slate-600"
+                />
+              </div>
+            </div>
+
             <div className="space-y-2">
               <label className="text-sm font-medium text-slate-300 ml-1">Email Address</label>
               <div className="relative group">
@@ -137,39 +125,26 @@ const LoginPageContent = () => {
                   <Mail className="w-5 h-5" />
                 </div>
                 <input 
-                  type="email"
-                  name="email"
-                  required
-                  placeholder="name@example.com"
-                  value={formData.email}
-                  onChange={handleInputChange}
+                  type="email" name="email" required placeholder="name@example.com"
+                  value={formData.email} onChange={handleInputChange}
                   className="w-full bg-slate-950/50 border border-slate-800 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 rounded-2xl py-4 pl-12 pr-4 outline-none transition-all placeholder:text-slate-600"
                 />
               </div>
             </div>
 
-            {/* Password Field */}
             <div className="space-y-2">
-              <div className="flex justify-between items-center ml-1">
-                <label className="text-sm font-medium text-slate-300">Password</label>
-                <button type="button" className="text-xs !bg-slate-800 text-blue-500 hover:underline font-medium ">Forgot Password?</button>
-              </div>
+              <label className="text-sm font-medium text-slate-300 ml-1">Password</label>
               <div className="relative group">
                 <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-blue-400 transition-colors">
                   <Lock className="w-5 h-5" />
                 </div>
                 <input 
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  required
-                  placeholder="••••••••"
-                  value={formData.password}
-                  onChange={handleInputChange}
+                  type={showPassword ? "text" : "password"} name="password" required placeholder="••••••••"
+                  value={formData.password} onChange={handleInputChange}
                   className="w-full bg-slate-950/50 border border-slate-800 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 rounded-2xl py-4 pl-12 pr-12 outline-none transition-all placeholder:text-slate-600"
                 />
                 <button 
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
+                  type="button" onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 !bg-slate-800 text-slate-500 hover:text-white transition-colors"
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
@@ -177,24 +152,20 @@ const LoginPageContent = () => {
               </div>
             </div>
 
-            <button 
-              type="submit" 
-              className="w-full !bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2 group mt-4"
-            >
-              Sign In to Dashboard
+            <button type="submit" className="w-full !bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2 group mt-4">
+              Create Account
               <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
           </form>
 
           <div className="mt-8 pt-8 border-t border-slate-800 text-center">
             <p className="text-slate-400 text-sm">
-              Don't have an account?{' '}
-              <button onClick={() => navigate('/register')} className="!bg-slate-800 text-blue-500 font-bold hover:underline">Register now</button>
+              Already have an account?{' '}
+              <button onClick={() => navigate('/login')} className="!bg-slate-800 text-blue-500 font-bold hover:underline">Sign In</button>
             </p>
           </div>
         </div>
-
-        {/* Footer info */}
+        
         <div className="mt-12 text-center text-slate-500 text-xs">
           © 2026 CivicConnect. Secure Gateway • Encrypted Access
         </div>
@@ -203,22 +174,4 @@ const LoginPageContent = () => {
   );
 };
 
-// Wrapper component to provide Router context if rendered standalone
-const LoginPage = () => {
-  const inRouter = useInRouterContext();
-  
-  // If the component is rendered directly (e.g. testing or misconfigured main.jsx),
-  // wrap it with a fallback BrowserRouter to prevent useLocation/useNavigate from crashing.
-  if (!inRouter) {
-    return (
-      <BrowserRouter>
-        <LoginPageContent />
-      </BrowserRouter>
-    );
-  }
-  
-  // If it's already inside a router (like App.jsx), just render normally.
-  return <LoginPageContent />;
-};
-
-export default LoginPage;
+export default RegisterPage;

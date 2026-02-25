@@ -40,7 +40,7 @@ const LandingPage = () => {
             >
               Login
             </button>
-            <button className="text-sm font-medium hover:text-orange-400 transition-colors !bg-black px-4 py-2 rounded-lg hover:border-blue-500 flex items-center gap-2 transition-all">
+            <button onClick={() => navigate('/report-issue')} className="text-sm font-medium hover:text-orange-400 transition-colors !bg-black px-4 py-2 rounded-lg hover:border-blue-500 flex items-center gap-2 transition-all">
               <AlertTriangle className="w-4 h-4 text-orange-400" />
               Report Issue
             </button>
@@ -400,7 +400,7 @@ const LandingPage = () => {
           <div className="space-y-6">
             <h4 className="font-bold text-lg">Legal</h4>
             <ul className="space-y-4">
-              <li><button className="text-slate-400 hover:text-white transition-colors !bg-black">Privacy Policy</button></li>
+              <li><button onClick={() => navigate('/dashboard')} className="text-slate-400 hover:text-white transition-colors !bg-black">Privacy Policy</button></li>
               <li><button className="text-slate-400 hover:text-white transition-colors !bg-black">Terms of Use</button></li>
               <li><button className="text-slate-400 hover:text-white transition-colors !bg-black">SLA Guidelines</button></li>
             </ul>
